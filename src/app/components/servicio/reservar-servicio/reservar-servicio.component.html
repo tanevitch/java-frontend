@@ -1,0 +1,45 @@
+<section style="margin-left: 20%; margin-right: 20%;">
+<form class="my-5" ngNativeValidate (ngSubmit)="onSubmit()" [formGroup]="reserva">
+      
+    <div class=" flex-column d-flex mb-4">
+      <label class="form-control-label">Servicio</label>  
+      <input required formControlName="servicio" [attr.disabled]="true" type="text" > 
+    </div>
+    <div class="row d-flex ">
+      <div class="form-group col-lg-6 mb-4"> 
+        <label class="form-control-label">Evento<span class="text-danger"> *</span></label> 
+        <select required formControlName="evento" class="form-select" aria-label="Default select example">
+          <option *ngFor="let evento of eventos" [ngValue]="evento.id" >{{evento.nombre}}</option>
+        </select>
+      </div>
+      <div class="form-group col-lg-6 mb-4"> 
+        <label class="form-control-label">Forma de pago<span class="text-danger"> *</span></label> 
+        <select required formControlName="formaDePago" class="form-select" aria-label="Default select example">
+          <option *ngFor="let formapago of formapagos" [ngValue]="formapago.id" >{{formapago.tipo}}</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="row d-flex">
+        <div class="form-group col-lg-6 flex-column d-flex mb-4"> 
+            <label class="form-control-label">Teléfono<span class="text-danger"> *</span></label> 
+            <input required pattern="[0-9]{5,}" title="Solo puede contener numeros" formControlName="telefono"  type="text"> 
+        </div>
+        <div class="form-group col-lg-6 flex-column d-flex mb-4"> 
+          <label class="form-control-label">Email<span class="text-danger"> *</span></label> 
+          <input required formControlName="email"  type="text" > 
+        </div>
+    </div>
+    <div class="form-group flex-column d-flex mb-4"> 
+      <label class="form-control-label">Fecha y hora<span class="text-danger"> *</span></label> 
+      <input required formControlName="fechaHora" type="datetime-local" > 
+    </div>
+    <div class="form-group flex-column d-flex mb-4"> 
+      <label class="form-control-label">Observaciones</label> 
+      <textarea formControlName="detalle" > </textarea>
+    </div>
+    
+    <button type="submit" class="btn btn-primary ">Reservar</button>
+
+  </form>
+</section>

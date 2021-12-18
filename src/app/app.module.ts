@@ -14,10 +14,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { EditarServicioComponent} from './components/servicio/editar-servicio/editar-servicio.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { TodosServiciosComponent } from './components/servicio/todos-servicios/todos-servicios.component';
+import { buscarServicioComponent } from './components/servicio/todos-servicios/todos-servicios.component';
 import { PerfilComponent } from './components/usuario/perfil/perfil.component';
 import { TokenizerService } from './services/tokenizer.service';
 import { ErrorService } from './services/error.service';
+import { ReservarServicioComponent } from './components/servicio/reservar-servicio/reservar-servicio.component';
+import { MisReservasComponent } from './components/reserva/mis-reservas/mis-reservas.component';
 
 @NgModule({
   declarations: [
@@ -30,8 +32,10 @@ import { ErrorService } from './services/error.service';
     NavbarComponent,
     EditarServicioComponent,
     DashboardComponent,
-    TodosServiciosComponent,
-    PerfilComponent
+    buscarServicioComponent,
+    PerfilComponent,
+    ReservarServicioComponent,
+    MisReservasComponent
   ],
   imports: [
     BrowserModule,

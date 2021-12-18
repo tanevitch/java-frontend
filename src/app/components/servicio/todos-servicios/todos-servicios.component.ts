@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ReservaService } from 'src/app/services/reserva.service';
 import { Servicio } from '../../../models/servicio/servicio';
 import { ServicioService } from '../../../services/servicio.service';
 
@@ -8,10 +9,10 @@ import { ServicioService } from '../../../services/servicio.service';
   styleUrls: ['./todos-servicios.component.css', '../../../app.component.css']
 })
 
-export class TodosServiciosComponent implements OnInit {
+export class buscarServicioComponent implements OnInit {
   public listServicios: Array<Servicio> = [];
 
-  constructor(private servicioService: ServicioService) { }
+  constructor(private servicioService: ServicioService, private reservaService: ReservaService) { }
 
   ngOnInit(): void {
     this.obtenerServicios();    
@@ -21,5 +22,9 @@ export class TodosServiciosComponent implements OnInit {
         this.listServicios = res;
         console.log(res)
     })
+  }
+
+  reservar(servicio: Servicio){
+    this.reservaService.reservarServicio(servicio)
   }
 }

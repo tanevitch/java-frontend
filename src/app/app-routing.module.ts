@@ -8,8 +8,10 @@ import { RegistroComponent } from './components/registro/registro.component';
 import { EditarServicioComponent} from './components/servicio/editar-servicio/editar-servicio.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PerfilComponent } from './components/usuario/perfil/perfil.component';
-import { TodosServiciosComponent } from './components/servicio/todos-servicios/todos-servicios.component';
+import { buscarServicioComponent } from './components/servicio/todos-servicios/todos-servicios.component';
 import { ProtegerRutaGuard } from './guards/proteger-ruta.guard';
+import { ReservarServicioComponent } from './components/servicio/reservar-servicio/reservar-servicio.component';
+import { MisReservasComponent } from './components/reserva/mis-reservas/mis-reservas.component';
 
 const routes: Routes = [
       { path : 'login', component: LoginComponent},
@@ -20,7 +22,10 @@ const routes: Routes = [
       { path : 'servicios/nuevo', component: NuevoServicioComponent, canActivate: [ProtegerRutaGuard]},
       { path : 'servicios/editar/:id', component: EditarServicioComponent, canActivate: [ProtegerRutaGuard]},
       { path : 'dashboard', component: DashboardComponent, canActivate: [ProtegerRutaGuard]},
-      { path : 'todosservicios', component: TodosServiciosComponent, canActivate: [ProtegerRutaGuard]},            
+      { path : 'buscarServicio', component: buscarServicioComponent, canActivate: [ProtegerRutaGuard]},
+      { path : 'reservarServicio/:id', component: ReservarServicioComponent, canActivate: [ProtegerRutaGuard]},        
+      { path : 'misReservas', component:  MisReservasComponent, canActivate: [ProtegerRutaGuard]},
+
 ];
 
 

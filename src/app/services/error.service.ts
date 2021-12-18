@@ -18,6 +18,9 @@ export class ErrorService implements HttpInterceptor {
                 this.authenticationService.logout();
                 location.reload();
             }
+            if (err.error == null){
+                err.error= "Ha ocurrido un error! Inténtelo nuevamente más tarde"
+            }
             Swal.fire({
               icon: 'error',
               title: 'Oops...',

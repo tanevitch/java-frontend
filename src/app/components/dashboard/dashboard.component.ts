@@ -22,6 +22,10 @@ export class DashboardComponent implements OnInit {
   }
 
   irAVerServicios(): void {
-    this.router.navigate(["todosservicios"])      
+    this.router.navigate(["buscarServicio"])      
+  }
+
+  irAVerReservas(): void {
+    this.router.navigate(["misReservas"])      
   }
 }
