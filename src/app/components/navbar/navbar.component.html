@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand h1" routerLink="dashboard">
+            <!-- <i class='bx bx-world bx-sm text-dark'></i> -->
+            <span class="text-dark h4">Reserv</span><span class="text-primary  h4">AR</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
+                <ul class="navbar-nav align-items-center" *ngIf="authService.existeToken(); else elseBlock">
+                    <li class="nav-item">
+                        <a routerLink="servicios" class="nav-link btn-nav rounded-pill" >Mis servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a routerLink="servicios/nuevo" class="nav-link btn-nav rounded-pill" >Publicar servicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a routerLink="todosservicios" class="nav-link btn-nav rounded-pill" >Buscar servicios</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav align-items-center" *ngIf="authService.existeToken()">
+                    <li class="nav-item"><a  class="btn btn-primary" routerLink="perfil">Mis datos</a></li>
+                    <li class="nav-item"><a  class="btn btn-primary" (click)="logout()">Cerrar sesión</a></li>
+                </ul >
+                <ng-template #elseBlock>
+                    <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+                        <li class="nav-item "><a type="button" class="btn btn-primary" routerLink="/login">Iniciar Sesión</a></li>
+                        <li class="nav-item"><a type="button" class="btn btn-primary" routerLink="/registro">Registrarse</a></li>
+                    </ul>
+                </ng-template>
+        </div>
+    </div>
+</nav>

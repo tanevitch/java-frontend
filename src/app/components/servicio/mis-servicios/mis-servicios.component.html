@@ -1,0 +1,37 @@
+<section class="container py-3">
+  <div class="row" *ngIf="listServicios.length != 0; else elseBlock"> 
+    <h1 class="pb-2">Mis servicios</h1>
+    <div  class="col-lg-4 py-2"  *ngFor="let item of listServicios">
+      <div class="card h-100">
+        <div class="card-header text-white rojo ">
+        </div>
+        <img class="card-img-top" src={{item.foto}} alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{item.nombre}}</h5>
+          <h6 class="card-text">{{item.tipoServicio.nombre}}</h6>
+
+          <p class="card-text ">{{item.descripcion}}</p>
+
+          <p class="fst-italic text-muted small">
+              Tel: {{item.whatsapp}}
+          </p>
+          <p *ngIf="item.instagram" class="fst-italic text-muted small">
+              Instagram: {{item.instagram}}
+          </p>
+          
+          <p *ngIf="item.url" class="fst-italic text-muted small">
+            URL: {{item.url}}
+          </p>
+         </div>
+        <div class="card-footer text-center">
+          <a class="btn btn-light border border-3">Ver solicitudes</a>
+          <button type="button" class="btn btn-secondary"  (click)="editarServicio(item)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+          <button type="button" class="btn btn-danger" (click)="borrarServicio(item)"><i class="fa fa-times" ></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #elseBlock>
+    <h1 class="text-center">No hay resultados</h1>
+  </ng-template>
+</section>

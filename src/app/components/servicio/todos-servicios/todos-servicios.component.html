@@ -1,0 +1,38 @@
+<section>
+  <div class="container">
+      <div class="row my-3 justify-content-center" *ngIf="listServicios.length != 0; else elseBlock">
+          <h1 class="pb-2">Búsqueda de servicios</h1>
+          <div class="col-lg-4 py-2" *ngFor="let item of listServicios">
+              <div class="card  h-100 mb-2 " style="max-width: 100%;">
+                  <div class="card-header rojo">
+                  </div>
+                  <img class="card-img-top" src={{item.foto}} alt="Card image cap">
+                  <div class="card-body ">
+                      <p style="font-size: large;">
+                          <strong>{{item.nombre}}</strong>
+                          <br>
+                          <small>{{item.tipoServicio.nombre}}</small>
+                      </p>
+                      <p>
+                        {{item.descripcion}}
+                      </p>
+                      <p class="fst-italic text-muted small">
+                          Tel: {{item.whatsapp}}
+                      </p>
+                      <p *ngIf="item.instagram" class="fst-italic text-muted small">
+                          Instagram: {{item.instagram}}
+                      </p>
+                      
+                      <p *ngIf="item.url" class="fst-italic text-muted small">
+                        URL: {{item.url}}
+                      </p>
+                      <button type="button" class="btn btn-primary">Reservar</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <ng-template #elseBlock>
+        <h1 class="text-center">No hay resultados</h1>
+      </ng-template>
+  </div>
+</section>

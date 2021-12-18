@@ -1,0 +1,287 @@
+
+body{
+  min-height:100vh; margin:0; position:relative;
+  }
+
+  body::after {
+    content: '';
+    display: block;
+    height: 60px; 
+  }
+  
+  footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+  }
+
+
+.btn-nav:hover{
+  border-color: #d52136 ;
+  background-color: #d52136;
+  color: white !important;
+  padding-left: 15px !important;
+padding-right: 15px !important;
+}
+
+.btn-nav{
+padding-left: 15px !important;
+padding-right: 15px !important;
+}
+
+.btn-outline-primary{
+  border-color: #d52137 ;
+  background-color: #d5213657;
+  color: white !important;
+}
+
+.btn-outline-primary:hover{
+  background-color: #d52137 ;
+  border-color: #d52137 ;
+  color: white !important;
+  box-shadow: none  !important;
+}
+
+.bg-light{
+  background-color: #eee3df !important ;
+}
+
+
+.bg-dark{
+  background-color: #353b43 !important ;
+  color: white;
+}
+.text-primary{
+  color: #d52137 !important;
+}
+
+.lista-flex {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  align-items: center;
+  justify-content: center;
+}
+
+li{
+  padding: 10px;
+
+}
+
+.btn-primary{
+  border-color: #d52137;
+  background-color: #d52137 ;
+  color: white !important;
+}
+
+.btn-primary:hover{
+  background-color: #353b43    ;
+  border-color: #353b43    ;
+  color: white !important;
+}
+
+.btn-primary:focus{
+background-color: #d52137    ;
+border-color: #d52137    ;
+color: white !important;
+box-shadow: none  !important;
+}
+
+#index_banner1 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.603),rgba(0, 0, 0, 0.514)) , url('src/assets/img/banner1.jpg');
+  background-position: center center; background-size: cover;
+  height: 550px;
+  font-size: xx-large !important;
+  font-weight: 400px;
+  /* text-shadow: 1px 1px 1px black, 0 0 1em black, 0 0 0.1em black; */
+  font-family: 'Roboto', sans-serif;
+
+}
+
+#index_banner2 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.863),rgba(0, 0, 0, 0.637)) , url('src/assets/img/banner2.jpg');
+  background-position: center center; background-size: cover;
+  font-size: xx-large !important;
+  height: 550px;
+
+  font-family: 'Roboto', sans-serif;
+
+}
+
+#index_banner3 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.863),rgba(0, 0, 0, 0.637)) , url('src/assets/img/banner3.jpg');
+  background-position: center center; background-size: cover;
+  font-size: xx-large !important;
+  height: 550px;
+
+  font-family: 'Roboto', sans-serif;
+
+}
+
+
+.direccion{
+  font-weight : 100;
+  font-size: x-large !important;
+}
+
+.rojo{
+  background-color: #d52137;
+}
+
+.card:hover {
+  transform: scale(1.1);
+}
+
+
+
+.accordion-button:not(.collapsed) {
+  font-weight: bold;
+  color: #d52137;
+  background-color: #eee3df;
+}
+
+.accordion-button:focus {
+  z-index: 3;
+  border-color: #ccbcc4;
+  outline: 0;
+  box-shadow: 0px 0px 5px 1px rgb(204, 188, 196) !important;
+}
+
+
+/*  */
+
+ul {
+list-style: none;
+}
+
+.filter-result .job-box {
+-webkit-box-shadow: 0 0 35px 0 rgba(130, 130, 130, 0.2);
+        box-shadow: 0 0 35px 0 rgba(130, 130, 130, 0.2);
+border-radius: 10px;
+padding: 10px 35px;
+}
+
+
+.job-overview .overview-bottom,
+.job-overview .overview-top {
+padding: 35px;
+}
+
+.job-content ul li {
+font-weight: 600;
+opacity: 0.75;
+border-bottom: 1px solid #ccc;
+padding: 10px 5px;
+}
+
+@media (min-width: 768px) {
+.job-content ul li {
+  border-bottom: 0;
+  padding: 0;
+}
+}
+
+.job-content ul li i {
+font-size: 20px;
+position: relative;
+top: 1px;
+}
+.mb-30 {
+  margin-bottom: 30px;
+}
+
+.mr-md-4{
+  margin-left: 20px;
+}
+
+/*  */
+
+.botonOk {
+display: flex;
+justify-content: center;
+}
+
+input,
+textarea,
+#boton {
+  padding: 8px 15px;
+  border-radius: 5px !important;
+  margin: 5px 0px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  font-size: 18px !important;
+  font-weight: 300
+}
+
+input:focus,
+textarea:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  border: 1px solid #00BCD4;
+  outline-width: 0;
+  font-weight: 400
+}
+
+.descrip {
+margin-top: 20px;
+display: flex;
+justify-content: left;
+}
+.contacto {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.nuevoServ{
+margin-bottom: 40px;
+}
+
+.but{
+margin-top: 20px;
+}
+
+/* ver mis reservas - rating */
+
+.rating {
+width: 226px;
+margin: 0 auto 1em;
+font-size: 20px;
+overflow:hidden;
+}
+.rating input {
+float: right;
+opacity: 0;
+position: absolute;
+}
+.rating a,
+.rating label {
+float:right;
+color: #aaa;
+text-decoration: none;
+-webkit-transition: color .4s;
+-moz-transition: color .4s;
+-o-transition: color .4s;
+transition: color .4s;
+}
+.rating label:hover ~ label,
+.rating input:focus ~ label,
+.rating label:hover,
+.rating a:hover,
+.rating a:hover ~ a,
+.rating a:focus,
+.rating a:focus ~ a		{
+color: orange;
+cursor: pointer;
+}
+.rating2 {
+direction: rtl;
+}
+.rating2 a {
+float:none
+}
+
+.fondoFlores{
+  background-image: linear-gradient( rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.226) 100%), url("../assets/img/fondoFlores.jpg")
+}

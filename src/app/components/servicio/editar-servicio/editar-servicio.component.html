@@ -1,0 +1,64 @@
+<section>
+        <div class="container-fluid px-2 mx-auto">
+            <div class="fondoFlores row d-flex justify-content-center">
+                <div  class="col-xl-7 col-lg-8 col-md-9 col-11 text-center shadow-lg p-5 my-5 bg-white rounded">
+                    <h3 class="nuevoServ">Editar servicio</h3>
+                        <form class="form-card " ngNativeValidate (ngSubmit)="onSubmit()" [formGroup]="servicio">
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex"> 
+                                    <label class="form-control-label px-3">Nombre del servicio<span class="text-danger"> *</span></label> 
+                                    <input formControlName="nombre" type="text" id="fname" name="fname" placeholder="" required> 
+                                  </div>
+                                  <div class="form-group col-sm-6 flex-column d-flex"> 
+                                    <label class="form-control-label px-3">Tipo de servicio<span class="text-danger"> *</span></label> 
+                                    <select formControlName="tipoServicio" required class="form-select" [(ngModel)]="tipoActual.id" aria-label="Default select example">
+                                    <option *ngFor="let tipo of tiposervicios" [ngValue]="tipo.id" id="{{tipo.id}}">{{tipo.nombre}}</option>
+                                  </select>
+                                </div>
+                            </div>
+      
+                              <div class="form-group col-12 flex-column d-flex"> 
+                                  <label class="form-control-label px-3 descrip">Descripción<span class="text-danger"> *</span></label> 
+                                  <textarea  formControlName="descripcion" maxlength="255" placeholder="Ingrese detalles de su servicio que considere importantes" required></textarea>
+                              </div>
+                              <label for="imagenes" class="form-control-label px-3 mb-2">Imagen</label>
+                              <div class="d-flex">
+                                <img class="card-img-top" src={{foto}} alt="Card image cap" style="height: 40%; width: 40%;">
+                                <input type="file"  accept=".png, .jpg, .jpeg" (change)="onUploadChange($event)" class="custom-file-input me-2 " id="imagenes" >
+                         
+                              </div>
+                                
+                            <div>
+                                <div class="form-group col-12 flex-column d-flex"> <label class="form-control-label contacto">Contacto</label>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-6 flex-column d-flex"> 
+                                            <label class="form-control-label px-3">Numero telefónico<span class="text-danger"> *</span></label> 
+                                            <input required pattern="[0-9]{5,}" title="Solo puede contener numeros" formControlName="whatsapp"  type="text"> 
+                                          </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex"> 
+                                            <label class="form-control-label px-3">Página web<span class="text-danger"></span></label> 
+                                            <input     formControlName="url" type="text" id="email" name="email" placeholder=""> 
+                                          </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex"> 
+                                            <label class="form-control-label px-3">Instagram<span class="text-danger"></span></label> 
+                                            <input formControlName="instagram" type="text" id="ig" name="ig" placeholder="Ingrese el nombre de su cuenta"> 
+                                          </div>
+                                        <div class="form-group col-sm-6 flex-column d-flex"> 
+                                            <label class="form-control-label px-3">Twitter<span class="text-danger"></span></label> 
+                                            <input formControlName="twitter" type="text" id="tw" name="tw" placeholder="Ingrese el nombre de su cuenta"> 
+                                          </div>
+                                    </div>
+                                </div>
+      
+                            </div>
+                            <div class="botonOk">
+                                <div class="form-group col-sm-6"> <button id="boton" type="submit" class="btn-block btn-primary but ">Confirmar</button> </div>
+                                <div class="form-group col-sm-6"> <button id="boton" type="button" (click)="volver()" class="btn-block btn-primary but">Cancelar</button> </div>
+                            </div>
+      
+                        </form>
+                    </div>
+                </div>
+            </div>
+      </section>
+      
