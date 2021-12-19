@@ -12,6 +12,12 @@ export class MisReservasComponent implements OnInit {
 
   ngOnInit(): void {
     this.reservaService.obtenerReservas().subscribe(res => {
+      res.forEach((reserva: any) => { 
+        let fechaHora= reserva.fechaHora.toLocaleString("es-AR").split("T")
+        reserva.fecha = fechaHora[0]
+        reserva.hora = fechaHora[1]
+      });
+      console.log(res)
       this.reservas= res
     })
   }

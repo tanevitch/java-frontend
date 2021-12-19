@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../../../services/usuario.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-perfil',
@@ -9,12 +10,30 @@ import Swal from 'sweetalert2';
   styleUrls: ['../../../app.component.css'],
 })
 export class PerfilComponent implements OnInit {
-  usuarioData =
-  {
-    nombre: "",
-    apellido: "",
-    mail: "",
-    contrasena:""
+  usuario: FormGroup
+  constructor(private usuarioService: UsuarioService, private router: Router) { }
+
+  ngOnInit(): void {
+    
+    this.usuario = new FormGroup({
+      nombre: new FormControl('', [Validators.required]),
+      apellido: new FormControl('', [Validators.required]),
+      contrasena: new FormControl('', [Validators.required]),
+      mail: new FormControl('', [Validators.required]),
+    })
+    this.usuarioService.getDatos().subscribe(data => {
+      this.usuario.patchValue(data)
+    })
+     
+  }
+
+  onSubmit() {
+    this.usuarioService.editarDatos(this.usuario.value).subscribe(
+      () => {
+        this.successUpdate();
+        this.router.navigate(["dashboard"])
+      }
+    )
   }
 
   successUpdate(){
@@ -22,29 +41,6 @@ export class PerfilComponent implements OnInit {
       'Actualizado!',
       'Usuario editado correctamente',
       'success'
-    )
-  }
-
-
-  
-  constructor(private usuarioService: UsuarioService, private router: Router) { }
-
-  ngOnInit(): void {
-    this.usuarioService.getDatos().subscribe(data => {
-      this.usuarioData.nombre = data.nombre;
-      this.usuarioData.apellido = data.apellido;
-      this.usuarioData.mail = data.mail;
-    })
-
-    console.log(this.usuarioData);
-  }
-
-  onSubmit(data: string) {
-    this.usuarioService.editarDatos(this.usuarioData).subscribe(
-      res => {
-        this.successUpdate();
-        this.router.navigate(["dashboard"])
-      }
     )
   }
 }

@@ -20,6 +20,7 @@ import { TokenizerService } from './services/tokenizer.service';
 import { ErrorService } from './services/error.service';
 import { ReservarServicioComponent } from './components/servicio/reservar-servicio/reservar-servicio.component';
 import { MisReservasComponent } from './components/reserva/mis-reservas/mis-reservas.component';
+import { GestionReservasComponent } from './components/reserva/gestion-reservas/gestion-reservas.component';
 
 @NgModule({
   declarations: [
@@ -35,8 +36,9 @@ import { MisReservasComponent } from './components/reserva/mis-reservas/mis-rese
     buscarServicioComponent,
     PerfilComponent,
     ReservarServicioComponent,
-    MisReservasComponent
-  ],
+    MisReservasComponent,
+    GestionReservasComponent
+    ],
   imports: [
     BrowserModule,
     routing,

@@ -12,20 +12,21 @@ import { buscarServicioComponent } from './components/servicio/todos-servicios/t
 import { ProtegerRutaGuard } from './guards/proteger-ruta.guard';
 import { ReservarServicioComponent } from './components/servicio/reservar-servicio/reservar-servicio.component';
 import { MisReservasComponent } from './components/reserva/mis-reservas/mis-reservas.component';
+import { GestionReservasComponent } from './components/reserva/gestion-reservas/gestion-reservas.component';
 
 const routes: Routes = [
       { path : 'login', component: LoginComponent},
       { path : 'registro', component: RegistroComponent},
       { path : '', component: HomeComponent},
-      { path : 'perfil', component: PerfilComponent },
+      { path : 'perfil', component: PerfilComponent, canActivate: [ProtegerRutaGuard]},
       { path : 'servicios', component: MisServiciosComponent, canActivate: [ProtegerRutaGuard]},
       { path : 'servicios/nuevo', component: NuevoServicioComponent, canActivate: [ProtegerRutaGuard]},
       { path : 'servicios/editar/:id', component: EditarServicioComponent, canActivate: [ProtegerRutaGuard]},
+      { path : 'servicios/:id/reservas', component:  GestionReservasComponent, canActivate: [ProtegerRutaGuard]},
       { path : 'dashboard', component: DashboardComponent, canActivate: [ProtegerRutaGuard]},
       { path : 'buscarServicio', component: buscarServicioComponent, canActivate: [ProtegerRutaGuard]},
       { path : 'reservarServicio/:id', component: ReservarServicioComponent, canActivate: [ProtegerRutaGuard]},        
       { path : 'misReservas', component:  MisReservasComponent, canActivate: [ProtegerRutaGuard]},
-
 ];
 
 

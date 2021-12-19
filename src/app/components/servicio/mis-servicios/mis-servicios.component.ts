@@ -60,4 +60,7 @@ export class MisServiciosComponent implements OnInit {
     this.router.navigate([`servicios/editar/${serv.id}`])
   }
 
+  verReservas(serv: Servicio){
+    this.router.navigate([`servicios/${serv.id}/reservas`])
+  }
 }

@@ -2,30 +2,30 @@
     <div class="container-fluid h-custom">
       <div class="row d-flex justify-content-center align-items-center h-100 fondoFlores ">
         <div class="col-md-8 col-lg-6 col-xl-4 shadow-lg p-5 my-5 bg-white rounded">
-          <form #userForm="ngForm" ngNativeValidate (ngSubmit)="onSubmit(userForm.value)">
+          <form ngNativeValidate (ngSubmit)="onSubmit()" [formGroup]="usuario">
 
             <!-- Email input -->
             <div class="form-group form-outline mb-4">
               <label class="form-label" for="nombre">Nombre</label>
-              <input name="nombre" [(ngModel)]="usuarioData.nombre" required pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" title="El nombre solo puede contener letras" type="text" id="nombre" class="form-control form-control-lg"
+              <input name="nombre" formControlName="nombre" required pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" title="El nombre solo puede contener letras" type="text" id="nombre" class="form-control form-control-lg"
                 placeholder="Ingrese su nombre" />
             </div>
 
             <div class="form-group form-outline mb-4">
                 <label class="form-label" for="apellido">Apellido</label>
-                <input name="apellido" [(ngModel)]="usuarioData.apellido" required pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" title="El apellido solo puede contener letras" type="text" id="apellido" class="form-control form-control-lg"
+                <input name="apellido"  formControlName="apellido" required pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" title="El apellido solo puede contener letras" type="text" id="apellido" class="form-control form-control-lg"
                   placeholder="Ingrese su apellido" />
             </div>
 
             <div class="form-group form-outline mb-4">
                 <label class="form-label" for="email">Email</label>
-                <input name="mail" [(ngModel)]="usuarioData.mail" required disabled type="email" id="email" class="form-control form-control-lg"
+                <input name="mail"  formControlName="mail" required [attr.disabled]="true" type="email" id="email" class="form-control form-control-lg"
                   placeholder="Ingrese su email" />
             </div>
 
             <div class="form-group form-outline mb-4">
                 <label class="form-label" for="contrasena">Cambiar contraseña</label>
-                <input name="contrasena" [(ngModel)]="usuarioData.contrasena" type="password" id="contrasena" class="form-control form-control-lg"
+                <input name="contrasena"  formControlName="contrasena" type="password" id="contrasena" class="form-control form-control-lg"
                   placeholder="Ingrese su contraseña" />
             </div>
 

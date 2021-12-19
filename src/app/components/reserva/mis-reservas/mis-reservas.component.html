@@ -13,25 +13,25 @@
                 <div class="career-search mb-60">
                     <div class="filter-result">
                         <div class="d-flex">
-                            <p class="mb-30 ff-montserrat">Reservas realizadas: {{reservas.length}}</p>
+                            <p class="mb-3">Reservas realizadas: {{reservas.length}}</p>
                         </div>
 
                         <div class="card mb-3" *ngFor="let item of reservas">
-                            <h5 class="card-header">{{item.servicio.nombre}}</h5>
-                            <div class="card-body text-center">
-                              <p class="card-text" *ngIf="item.detalle">{{item.detalle}}</p>
+                            <h5 class="card-header">{{item.servicio.nombre}} ({{item.estado.nombre}})</h5>
+                            <div class="card-body">
+                              <p class="card-text " *ngIf="item.detalle">{{item.detalle}}</p>
                               <div class="d-flex justify-content-around mb-3">
                                   <div>
-                                    <i class="bi bi-calendar-date"></i>{{item.fechaHora}}
+                                    <i class="bi bi-calendar-date me-2"></i>{{item.fecha}}
                                   </div>
                                   <div>
-                                    <i class="bi bi-clock"></i>{{item.fechaHora}}
+                                    <i class="bi bi-clock me-2"></i>{{item.hora}}
                                   </div>
                                   <div>
-                                    <i class="bi bi-arrow-right-circle"></i>{{item.servicio.tipoServicio.nombre}}
+                                    <i class="bi bi-arrow-right-circle me-2"></i>{{item.servicio.tipoServicio.nombre}}
                                   </div>
                               </div>
-                              <a href="#" class="btn btn-primary">Puntuar</a>
+                              <button *ngIf="item.estado.nombre == 'FINALIZADA'" class="btn btn-primary">Puntuar</button>
                             </div>
                         </div>
                   

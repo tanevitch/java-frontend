@@ -11,12 +11,23 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class ReservaService {
+  
 
   endpoint: string = 'api/reservas'
   constructor(private router: Router, private http: HttpClient, private authService: AuthService) { }
 
   public reservarServicio(servicio: Servicio){
     this.router.navigate([`reservarServicio/${servicio.id}`])
+  }
+
+  public confirmarReserva(id: number) {
+    let url = environment.apiJava + this.endpoint + "/confirmar/" +id
+    return this.http.post(url, null)
+  }
+
+  public rechazarReserva(id: number) {
+    let url = environment.apiJava + this.endpoint + "/rechazar/" +id
+    return this.http.post(url, null)
   }
 
   public nuevaReserva(reserva: Reserva): Observable<any>{
@@ -26,6 +37,11 @@ export class ReservaService {
 
   public obtenerReservas(): Observable<any>{
     let url = environment.apiJava + this.endpoint + "/usuario/" + this.authService.obtenerIdUsuario()
+    return this.http.get(url)
+  }
+
+  public obtenerReservasDeServicio(id_servicio: any): Observable<any>{
+    let url = environment.apiJava + this.endpoint + "/servicio/" + id_servicio
     return this.http.get(url)
   }
 }
