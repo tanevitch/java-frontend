@@ -37,7 +37,7 @@ import { GestionReservasComponent } from './components/reserva/gestion-reservas/
     PerfilComponent,
     ReservarServicioComponent,
     MisReservasComponent,
-    GestionReservasComponent
+    GestionReservasComponent,
     ],
   imports: [
     BrowserModule,

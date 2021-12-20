@@ -31,9 +31,10 @@
                                     <i class="bi bi-arrow-right-circle me-2"></i>{{item.servicio.tipoServicio.nombre}}
                                   </div>
                               </div>
-                              <button *ngIf="item.estado.nombre == 'FINALIZADA'" class="btn btn-primary">Puntuar</button>
+                              <button *ngIf="item.estado.nombre == 'FINALIZADA'" (click)="obtenerAspectos(item.servicio)" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#exampleModal">Puntuar</button>
                             </div>
                         </div>
+                        
                   
 
 
@@ -45,4 +46,36 @@
         
     </div>
 
+</section>
+
+<section>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">¡Califica el servicio!</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" *ngIf="servicioAPuntuar">
+              <h5>{{servicioAPuntuar.nombre}} | {{servicioAPuntuar.tipoServicio.nombre}}</h5>
+              <div *ngFor="let aspecto of aspectosPuntuacion">
+                 <h6 class="text-capitalize my-1">{{aspecto.nombre}}</h6>
+                <select class="form-select mb-2" aria-label="Default select example" required>
+                    <option selected disabled>Selecciona un puntuaje</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="3">4</option>
+                    <option value="3">5</option>
+                  </select>
+              </div>
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+    </div>
 </section>

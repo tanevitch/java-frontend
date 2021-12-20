@@ -12,22 +12,35 @@ import Swal from 'sweetalert2';
   styleUrls: ['../../../app.component.css'],
 })
 export class GestionReservasComponent implements OnInit {
-  reservas: any
+  reservasPendientes: any
+  reservasCanceladas: any
+  reservasSinConfirmar: any
+
   servicio: Servicio
   constructor(private router: Router, private reservaService: ReservaService, private servicioService: ServicioService) { }
 
   ngOnInit(): void {
     let id= window.location.pathname.split("/")[2];
     this.servicioService.getServicioConId(id).subscribe(res => this.servicio= res);
-    this.reservaService.obtenerReservasDeServicio(id).subscribe(
+    this.reservaService.obtenerReservasDeServicio(id, "SINCONFIRMAR").subscribe(
       res => {
-        this.reservas = res
+        this.reservasSinConfirmar = res
+      }
+    )
+    this.reservaService.obtenerReservasDeServicio(id, "CANCELADA").subscribe(
+      res => {
+        this.reservasCanceladas = res
+      }
+    )
+    this.reservaService.obtenerReservasDeServicio(id, "CONFIRMADA").subscribe(
+      res => {
+        this.reservasPendientes = res
       }
     )
   }
 
   confirmar(reserva: Reserva){
-    this.reservaService.confirmarReserva(reserva.id).subscribe(() => {
+    this.reservaService.cambiarEstado(reserva.id, "CONFIRMADA").subscribe(() => {
       Swal.fire(
         '¡Listo!',
         'Reserva confirmada',
@@ -41,11 +54,41 @@ export class GestionReservasComponent implements OnInit {
     })
   }
 
+  marcarComoFinalizada(reserva: Reserva){
+    this.reservaService.cambiarEstado(reserva.id, "FINALIZADA").subscribe(() => {
+      Swal.fire(
+        '¡Listo!',
+        'Reserva finalizada',
+        'success'
+      ).then(
+        () =>  {
+         window.location.reload();
+        }
+ 
+       )
+    })
+  }
+
   rechazar(reserva: Reserva){
-    this.reservaService.rechazarReserva(reserva.id).subscribe(() => {
+    this.reservaService.cambiarEstado(reserva.id, "RECHAZADA").subscribe(() => {
       Swal.fire(
         '¡Listo!',
         'Reserva rechazada',
+        'success'
+      ).then(
+       () =>  {
+        window.location.reload();
+       }
+
+      )
+    })
+  }
+
+  cancelar(reserva: Reserva){
+    this.reservaService.cambiarEstado(reserva.id, "CANCELADA").subscribe(() => {
+      Swal.fire(
+        '¡Listo!',
+        'Reserva cancelada',
         'success'
       ).then(
        () =>  {

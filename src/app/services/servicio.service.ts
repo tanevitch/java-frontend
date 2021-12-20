@@ -46,4 +46,13 @@ export class ServicioService {
     let url = environment.apiJava + this.endpoint 
     return this.http.post(url, serv)
   }
+
+  public puntuar(servicio: Servicio, aspecto: string, puntuacion: number): Observable<any>{
+    let url = environment.apiJava + this.endpoint + "/calificar" 
+    return this.http.post(url, {
+      servicio: servicio,
+      aspecto: aspecto,
+      puntuacion: puntuacion
+    })
+  }
 }
