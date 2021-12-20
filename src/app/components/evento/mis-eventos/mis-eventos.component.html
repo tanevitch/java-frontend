@@ -1,0 +1,26 @@
+<section class="container py-3">
+  <div class="row" *ngIf="listEventos.length != 0; else elseBlock">
+    <h1 class="pb-2">Mis servicios</h1>
+    <div class="col-lg-4 py-2"  *ngFor="let item of listEventos">
+      <div class="card h-100">
+        <div class="card-header text-white rojo ">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{item.nombre}}</h5>
+          <h6 class="card-text">Codigo postal: {{item.cp}}</h6>
+
+          <p class="card-text ">{{item.provincia}}</p>
+
+          <p class="card-text ">{{item.direccion}}</p>
+        </div>
+
+        <div class="card-footer text-center">
+          <a class="btn btn-light border border-3" >Servicios solicitados</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #elseBlock>
+    <h1 class="text-center">No hay eventos</h1>
+  </ng-template>
+</section>

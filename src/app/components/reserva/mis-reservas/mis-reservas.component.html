@@ -31,11 +31,12 @@
                                     <i class="bi bi-arrow-right-circle me-2"></i>{{item.servicio.tipoServicio.nombre}}
                                   </div>
                               </div>
+                              <button *ngIf="item.estado.nombre == 'SINCONFIRMAR' || item.estado.nombre == 'CONFIRMADA' " (click)="cancelar(item)" class="btn btn-primary" >Cancelar</button>
                               <button *ngIf="item.estado.nombre == 'FINALIZADA'" (click)="obtenerAspectos(item.servicio)" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#exampleModal">Puntuar</button>
                             </div>
                         </div>
-                        
-                  
+
+
 
 
                     </div>
@@ -43,7 +44,7 @@
             </div>
         </div>
 
-        
+
     </div>
 
 </section>
@@ -59,6 +60,7 @@
             <div class="modal-body" *ngIf="servicioAPuntuar">
               <h5>{{servicioAPuntuar.nombre}} | {{servicioAPuntuar.tipoServicio.nombre}}</h5>
               <div *ngFor="let aspecto of aspectosPuntuacion">
+
                  <h6 class="text-capitalize my-1">{{aspecto.nombre}}</h6>
                 <select class="form-select mb-2" aria-label="Default select example" required>
                     <option selected disabled>Selecciona un puntuaje</option>
@@ -69,7 +71,7 @@
                     <option value="3">5</option>
                   </select>
               </div>
-              
+
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

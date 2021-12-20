@@ -21,6 +21,8 @@ import { ErrorService } from './services/error.service';
 import { ReservarServicioComponent } from './components/servicio/reservar-servicio/reservar-servicio.component';
 import { MisReservasComponent } from './components/reserva/mis-reservas/mis-reservas.component';
 import { GestionReservasComponent } from './components/reserva/gestion-reservas/gestion-reservas.component';
+import { NuevoEventoComponent } from './components/evento/nuevo-evento/nuevo-evento.component';
+import { MisEventosComponent } from './components/evento/mis-eventos/mis-eventos.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { GestionReservasComponent } from './components/reserva/gestion-reservas/
     ReservarServicioComponent,
     MisReservasComponent,
     GestionReservasComponent,
+    NuevoEventoComponent,
+    MisEventosComponent,
     ],
   imports: [
     BrowserModule,
