@@ -1,6 +1,7 @@
 <section class="container py-3">
+  <h1 class="pb-2">Mis eventos</h1>
+  <a routerLink="/eventos/nuevo" class="btn btn-primary" >Crear evento</a>
   <div class="row" *ngIf="listEventos.length != 0; else elseBlock">
-    <h1 class="pb-2">Mis servicios</h1>
     <div class="col-lg-4 py-2"  *ngFor="let item of listEventos">
       <div class="card h-100">
         <div class="card-header text-white rojo ">

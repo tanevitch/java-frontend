@@ -27,6 +27,7 @@ export class AuthService {
     .subscribe(
       data => {
         window.localStorage.setItem("email", data.email);
+        window.localStorage.setItem("name", data.name);
         window.localStorage.setItem("id_usuario", data.user_id);
         window.localStorage.setItem("token", data.token);
         this.router.navigate(["dashboard"])
@@ -45,6 +46,10 @@ export class AuthService {
 
   public obtenerIdUsuario(){
     return  window.localStorage.getItem("id_usuario")
+  }
+
+  public obtenerNombreUsuario(){
+    return  window.localStorage.getItem("name")
   }
 
   public existeToken(){

@@ -5,7 +5,7 @@ import { EventoService } from 'src/app/services/evento.service';
 @Component({
   selector: 'app-mis-eventos',
   templateUrl: './mis-eventos.component.html',
-  styleUrls: ['./mis-eventos.component.css']
+  styleUrls: ['../../../app.component.css'],
 })
 export class MisEventosComponent implements OnInit {
 
