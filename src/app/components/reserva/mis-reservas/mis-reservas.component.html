@@ -61,23 +61,30 @@
               <h5>{{servicioAPuntuar.nombre}} | {{servicioAPuntuar.tipoServicio.nombre}}</h5>
               <div *ngFor="let aspecto of aspectosPuntuacion">
 
-                 <h6 class="text-capitalize my-1">{{aspecto.nombre}}</h6>
-                <select class="form-select mb-2" aria-label="Default select example" required>
-                    <option selected disabled>Selecciona un puntuaje</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="3">4</option>
-                    <option value="3">5</option>
-                  </select>
+                <h6 class="text-capitalize my-1">{{aspecto.nombre}}</h6>
+                <div id="full-stars-example-two">
+                 <div class="rating-group" >
+                     <label (click)="countStar(1,aspecto.nombre)" aria-label="1 star" class="rating__label" for="{{aspecto.nombre}}rating3-1"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                     <input class="rating__input" name="{{aspecto.nombre}}rating3" id="{{aspecto.nombre}}rating3-1" value="1" type="radio">
+                     <label (click)="countStar(2,aspecto.nombre)" aria-label="2 stars" class="rating__label" for="{{aspecto.nombre}}rating3-2"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                     <input class="rating__input" name="{{aspecto.nombre}}rating3" id="{{aspecto.nombre}}rating3-2" value="2" type="radio">
+                     <label (click)="countStar(3,aspecto.nombre)" aria-label="3 stars" class="rating__label" for="{{aspecto.nombre}}rating3-3"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                     <input class="rating__input" name="{{aspecto.nombre}}rating3" id="{{aspecto.nombre}}rating3-3" value="3" type="radio">
+                     <label (click)="countStar(4,aspecto.nombre)" aria-label="4 stars" class="rating__label" for="{{aspecto.nombre}}rating3-4"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                     <input class="rating__input" name="{{aspecto.nombre}}rating3" id="{{aspecto.nombre}}rating3-4" value="4" type="radio">
+                     <label (click)="countStar(5,aspecto.nombre)" aria-label="5 stars" class="rating__label" for="{{aspecto.nombre}}rating3-5"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                     <input class="rating__input" name="{{aspecto.nombre}}rating3" id="{{aspecto.nombre}}rating3-5" value="5" type="radio">
+                 </div>
+             </div>
               </div>
 
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+              <button type="button" (click)="this.save()" class="btn btn-primary">Save changes</button>
             </div>
           </div>
         </div>
     </div>
 </section>
+

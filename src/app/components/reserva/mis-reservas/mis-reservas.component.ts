@@ -1,3 +1,4 @@
+import { ServicioService } from 'src/app/services/servicio.service';
 import { Component, OnInit } from '@angular/core';
 import { Reserva } from 'src/app/models/reserva/reserva';
 import { Servicio } from 'src/app/models/servicio/servicio';
@@ -8,13 +9,19 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-mis-reservas',
   templateUrl: './mis-reservas.component.html',
-  styleUrls: ['../../../app.component.css'],
+  styleUrls: ['../../../app.component.css', './mis-reservas.component.css'],
+
 })
 export class MisReservasComponent implements OnInit {
   reservas: any
   aspectosPuntuacion: any
   servicioAPuntuar: Servicio
-  constructor(private reservaService: ReservaService, private tipoServicioService: TipoServicioService) { }
+
+  map: any
+
+  selectedValue: number;
+
+  constructor(private servicioService: ServicioService, private reservaService: ReservaService, private tipoServicioService: TipoServicioService) { }
 
   ngOnInit(): void {
     this.reservaService.obtenerReservas().subscribe(res => {
@@ -25,7 +32,9 @@ export class MisReservasComponent implements OnInit {
       });
       console.log(res)
       this.reservas= res
+
     })
+
   }
 
   cancelar(reserva: Reserva){
@@ -42,10 +51,19 @@ export class MisReservasComponent implements OnInit {
       )
     })
   }
-
   obtenerAspectos(servicio: any){
      this.servicioAPuntuar = servicio
      this.tipoServicioService.getAspectosAPuntuar(servicio.tipoServicio.id).subscribe(res => this.aspectosPuntuacion= res)
   }
 
+
+  countStar(star: number, aspecto:string) {
+    this.map = {aspecto:star};
+  }
+
+  save(){
+    console.log(this.map)
+    this.servicioService.puntuar(this.servicioAPuntuar,this.map).subscribe(() =>{})
+
+  }
 }

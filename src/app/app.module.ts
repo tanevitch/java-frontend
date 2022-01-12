@@ -1,4 +1,3 @@
-
 import { LoginComponent } from './components/login/login.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -23,6 +22,7 @@ import { MisReservasComponent } from './components/reserva/mis-reservas/mis-rese
 import { GestionReservasComponent } from './components/reserva/gestion-reservas/gestion-reservas.component';
 import { NuevoEventoComponent } from './components/evento/nuevo-evento/nuevo-evento.component';
 import { MisEventosComponent } from './components/evento/mis-eventos/mis-eventos.component';
+import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 
 @NgModule({
   declarations: [
@@ -49,6 +49,7 @@ import { MisEventosComponent } from './components/evento/mis-eventos/mis-eventos
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    LeafletModule
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS, useClass: TokenizerService, multi:true},

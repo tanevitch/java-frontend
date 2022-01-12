@@ -4,4 +4,7 @@ export class Evento {
   public provincia: string;
   public direccion: string;
   public cp: number;
+  public tipoEvento: number;
+  public fechaHora: Date;
+  public geolocalizacion: string;
 }

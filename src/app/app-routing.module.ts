@@ -1,4 +1,3 @@
-
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
@@ -15,7 +14,6 @@ import { MisReservasComponent } from './components/reserva/mis-reservas/mis-rese
 import { GestionReservasComponent } from './components/reserva/gestion-reservas/gestion-reservas.component';
 import { NuevoEventoComponent } from './components/evento/nuevo-evento/nuevo-evento.component';
 import { MisEventosComponent } from './components/evento/mis-eventos/mis-eventos.component';
-
 const routes: Routes = [
       { path : 'login', component: LoginComponent},
       { path : 'registro', component: RegistroComponent},

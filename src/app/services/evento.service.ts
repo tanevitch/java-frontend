@@ -16,5 +16,10 @@ export class EventoService {
     let url = environment.apiJava + this.endpoint + "/usuario/" + this.authService.obtenerIdUsuario();
     return this.http.get<Array<Evento>>(url);
   }
-  
+
+  public nuevoEvento(evento: Evento): Observable<any>{
+    let url = environment.apiJava + this.endpoint
+    return this.http.post(url, evento)
+  }
+
 }

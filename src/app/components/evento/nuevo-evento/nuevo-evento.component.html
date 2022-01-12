@@ -46,7 +46,14 @@
                   <!--- xd --->
                   </div>
                   </div>
-                    <div class="botonOk">
+                  <label>Geolocalización <span class="text-danger"> *</span></label>
+                  <div id="map" (click)="getCoords()"
+                      leaflet
+                      (leafletMapReady)="onMapReady($event)"
+                      [leafletOptions]="mapOptions">
+                  </div>
+
+                    <div class="botonOk mt-4">
                         <div class="form-group col-sm-6"> <button id="boton" type="submit" class="btn-block btn-primary but ">Confirmar</button> </div>
                         <div class="form-group col-sm-6"> <button id="boton" class="btn-block btn-primary but">Cancelar</button> </div>
                     </div>

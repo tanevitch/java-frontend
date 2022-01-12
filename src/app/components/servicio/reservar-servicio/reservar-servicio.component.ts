@@ -22,10 +22,10 @@ export class ReservarServicioComponent implements OnInit {
   reserva: FormGroup
   usuario: Usuario
   servicio: Servicio;
-  
+
   constructor(private router: Router,
-    private eventoService: EventoService, 
-    private formaPagosService: FormapagoService, 
+    private eventoService: EventoService,
+    private formaPagosService: FormapagoService,
     private reservaService: ReservaService,
     private servicioService: ServicioService,
     private userService: UsuarioService) { }
