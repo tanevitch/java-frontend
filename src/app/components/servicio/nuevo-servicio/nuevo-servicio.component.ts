@@ -19,19 +19,19 @@ export class NuevoServicioComponent implements OnInit {
 
   onUploadChange(evt: any) {
     const file = evt.target.files[0];
-  
+
     if (file) {
       const reader = new FileReader();
-  
+
       reader.onload = this.handleReaderLoaded.bind(this);
       reader.readAsBinaryString(file);
     }
   }
-  
+
   handleReaderLoaded(e: any) {
     this.foto ="data:image/png;base64,"+btoa(e.target.result);
   }
-  
+
   ngOnInit() {
     this.tipoServicioService.getCategorias().subscribe(res =>{
       this.tiposervicios= res;
@@ -60,7 +60,7 @@ export class NuevoServicioComponent implements OnInit {
       reverseButtons: false
     }).then((result) => {
       if (result.isConfirmed) {
-        
+
         this.servicioService.nuevoServicio(datos).subscribe(() =>{
           Swal.fire(
             '¡Listo!',
@@ -85,7 +85,7 @@ export class NuevoServicioComponent implements OnInit {
     }
     datos["foto"]= this.foto
     this.confirmTest(datos)
-
+    console.log(datos)
     }
 
   }

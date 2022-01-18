@@ -13,7 +13,7 @@
                 <div class="career-search mb-60">
                     <div class="filter-result">
                         <div class="d-flex">
-                            <p class="mb-3">Reservas realizadas: {{reservas.length}}</p>
+                            <p class="mb-3">Reservas realizadas: {{ reservas.length}}</p>
                         </div>
 
                         <div class="card mb-3" *ngFor="let item of reservas">
@@ -64,15 +64,15 @@
                 <h6 class="text-capitalize my-1">{{aspecto.nombre}}</h6>
                 <div id="full-stars-example-two">
                  <div class="rating-group" >
-                     <label (click)="countStar(1,aspecto.nombre)" aria-label="1 star" class="rating__label" for="{{aspecto.nombre}}rating3-1"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                     <label (click)="countStar(1,aspecto.id)" aria-label="1 star" class="rating__label" for="{{aspecto.nombre}}rating3-1"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
                      <input class="rating__input" name="{{aspecto.nombre}}rating3" id="{{aspecto.nombre}}rating3-1" value="1" type="radio">
-                     <label (click)="countStar(2,aspecto.nombre)" aria-label="2 stars" class="rating__label" for="{{aspecto.nombre}}rating3-2"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                     <label (click)="countStar(2,aspecto.id)" aria-label="2 stars" class="rating__label" for="{{aspecto.nombre}}rating3-2"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
                      <input class="rating__input" name="{{aspecto.nombre}}rating3" id="{{aspecto.nombre}}rating3-2" value="2" type="radio">
-                     <label (click)="countStar(3,aspecto.nombre)" aria-label="3 stars" class="rating__label" for="{{aspecto.nombre}}rating3-3"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                     <label (click)="countStar(3,aspecto.id)" aria-label="3 stars" class="rating__label" for="{{aspecto.nombre}}rating3-3"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
                      <input class="rating__input" name="{{aspecto.nombre}}rating3" id="{{aspecto.nombre}}rating3-3" value="3" type="radio">
-                     <label (click)="countStar(4,aspecto.nombre)" aria-label="4 stars" class="rating__label" for="{{aspecto.nombre}}rating3-4"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                     <label (click)="countStar(4,aspecto.id)" aria-label="4 stars" class="rating__label" for="{{aspecto.nombre}}rating3-4"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
                      <input class="rating__input" name="{{aspecto.nombre}}rating3" id="{{aspecto.nombre}}rating3-4" value="4" type="radio">
-                     <label (click)="countStar(5,aspecto.nombre)" aria-label="5 stars" class="rating__label" for="{{aspecto.nombre}}rating3-5"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                     <label (click)="countStar(5,aspecto.id)" aria-label="5 stars" class="rating__label" for="{{aspecto.nombre}}rating3-5"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
                      <input class="rating__input" name="{{aspecto.nombre}}rating3" id="{{aspecto.nombre}}rating3-5" value="5" type="radio">
                  </div>
              </div>

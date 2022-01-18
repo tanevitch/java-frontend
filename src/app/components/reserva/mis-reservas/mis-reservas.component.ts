@@ -17,8 +17,7 @@ export class MisReservasComponent implements OnInit {
   aspectosPuntuacion: any
   servicioAPuntuar: Servicio
 
-  map: any
-
+  map: Map<string,number> = new Map<string,number>();
   selectedValue: number;
 
   constructor(private servicioService: ServicioService, private reservaService: ReservaService, private tipoServicioService: TipoServicioService) { }
@@ -56,14 +55,22 @@ export class MisReservasComponent implements OnInit {
      this.tipoServicioService.getAspectosAPuntuar(servicio.tipoServicio.id).subscribe(res => this.aspectosPuntuacion= res)
   }
 
-
   countStar(star: number, aspecto:string) {
-    this.map = {aspecto:star};
-  }
+
+
+    this.map.set(aspecto,star)
+
+  };
+
 
   save(){
     console.log(this.map)
-    this.servicioService.puntuar(this.servicioAPuntuar,this.map).subscribe(() =>{})
+    let jsonObject = {};
+    this.map.forEach((value, key) => {
+      jsonObject[key] = value
+    })
+    console.log(jsonObject)
+    this.servicioService.puntuar(this.servicioAPuntuar,jsonObject).subscribe(() =>{})
 
   }
 }

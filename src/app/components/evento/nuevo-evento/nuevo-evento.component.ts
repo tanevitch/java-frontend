@@ -5,6 +5,7 @@ import { TipoeventoService } from 'src/app/services/tipoevento.service';
 import {latLng, MapOptions, tileLayer, Map, Marker, icon} from 'leaflet';
 import { EventoService } from 'src/app/services/evento.service';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-nuevo-evento',
@@ -21,7 +22,7 @@ export class NuevoEventoComponent implements OnInit {
   marker = new Marker([-34.921035, -57.954522])
   latAndLng = [0,0]
 
-  constructor(private http: HttpClient, private eventoService: EventoService, private tipoEventoService: TipoeventoService, private router: Router) { }
+  constructor(private authService: AuthService, private http: HttpClient, private eventoService: EventoService, private tipoEventoService: TipoeventoService, private router: Router) { }
 
   ngOnInit(): void {
     this.http.get("https://apis.datos.gob.ar/georef/api/provincias").subscribe((res: any) => {(this.provincias = res.provincias.map((p:any) => p.nombre).sort())})
@@ -73,13 +74,21 @@ export class NuevoEventoComponent implements OnInit {
 
 
   onSubmit(){
+
     this.evento.patchValue({
-      geolocalizacion: this.latAndLng
+      geolocalizacion: this.latAndLng.toString()
     });
 
     var datos= this.evento.value
-    datos["id"]= {
-      id: 1
+
+    datos.fechaHora = datos.fechaHora.replace('T', ' ')
+
+    datos["usuario"] = {
+      id: this.authService.obtenerIdUsuario()
+    }
+
+    datos["tipoEvento"] = {
+      id: datos["tipoEvento"]
     }
     console.log(datos)
 

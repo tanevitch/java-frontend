@@ -24,15 +24,19 @@
                 </button>
               </h2>
               <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
+                <div class="accordion-body ">
                   <p><strong>{{reserva.usuario.nombre}} {{reserva.usuario.apellido}}</strong></p>
                   <strong>Evento: {{reserva.evento.fechaHora}}</strong>
-                  <ul>
+                  <ul class="col-lg-6">
                     <li>Tipo evento: {{reserva.evento.tipoEvento.nombre}}</li>
                     <li>Email: {{reserva.email}}</li>
                     <li>Telefono: {{reserva.telefono}}</li>
                     <li *ngIf="reserva.detalle">Descripcion: {{reserva.detalle}}</li>
                   </ul>
+                  <div id="map" leaflet
+                  (leafletMapReady)="onMapReady($event)"
+                  [leafletOptions]="mapOptions">
+              </div>
                   <div class="btn-group me-2" role="group" aria-label="Second group">
                     <button type="button" (click)="confirmar(reserva)" class="btn btn-secondary">Confirmar</button>
                   </div>
@@ -99,3 +103,9 @@
           </ng-template>
     </div>
 </section>
+<style>
+  #map {
+  height: 300px;
+  width: 400px;
+}
+</style>
