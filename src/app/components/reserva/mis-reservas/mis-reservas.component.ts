@@ -1,11 +1,12 @@
 import { ServicioService } from 'src/app/services/servicio.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Reserva } from 'src/app/models/reserva/reserva';
 import { Servicio } from 'src/app/models/servicio/servicio';
 import { ReservaService } from 'src/app/services/reserva.service';
 import { TipoServicioService } from 'src/app/services/tiposervicio.service';
 import Swal from 'sweetalert2';
 import { Puntuacion } from 'src/app/models/puntuacion/puntuacion';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-mis-reservas',
@@ -15,13 +16,14 @@ import { Puntuacion } from 'src/app/models/puntuacion/puntuacion';
 })
 export class MisReservasComponent implements OnInit {
   reservas: any
+  @ViewChild('botonPuntuar') botonPuntuar: ElementRef;
   aspectosPuntuacion: any
   servicioAPuntuar: Servicio
 
   map: Map<number,number> = new Map<number,number>();
   selectedValue: number;
 
-  constructor(private servicioService: ServicioService, private reservaService: ReservaService, private tipoServicioService: TipoServicioService) { }
+  constructor(private servicioService: ServicioService, private reservaService: ReservaService, private tipoServicioService: TipoServicioService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.reservaService.obtenerReservas().subscribe(res => {
@@ -65,11 +67,13 @@ export class MisReservasComponent implements OnInit {
 
 
   save(){
+    
     var puntuaciones: Puntuacion[] = []
+    var user= {id: this.authService.obtenerIdUsuario()}
     this.map.forEach((value, key) => {
-      puntuaciones.push(new Puntuacion(key, value))
+      puntuaciones.push(new Puntuacion(key, value, user))
     })
-    console.log(JSON.stringify(puntuaciones))
+
     this.servicioService.puntuar(this.servicioAPuntuar, puntuaciones).subscribe(() =>{})
 
   }
