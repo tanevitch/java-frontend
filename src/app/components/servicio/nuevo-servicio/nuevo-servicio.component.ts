@@ -60,7 +60,7 @@ export class NuevoServicioComponent implements OnInit {
       reverseButtons: false
     }).then((result) => {
       if (result.isConfirmed) {
-
+        console.log(datos)
         this.servicioService.nuevoServicio(datos).subscribe(() =>{
           Swal.fire(
             '¡Listo!',

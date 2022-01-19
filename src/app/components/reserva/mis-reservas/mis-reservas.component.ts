@@ -5,6 +5,7 @@ import { Servicio } from 'src/app/models/servicio/servicio';
 import { ReservaService } from 'src/app/services/reserva.service';
 import { TipoServicioService } from 'src/app/services/tiposervicio.service';
 import Swal from 'sweetalert2';
+import { Puntuacion } from 'src/app/models/puntuacion/puntuacion';
 
 @Component({
   selector: 'app-mis-reservas',
@@ -17,7 +18,7 @@ export class MisReservasComponent implements OnInit {
   aspectosPuntuacion: any
   servicioAPuntuar: Servicio
 
-  map: Map<string,number> = new Map<string,number>();
+  map: Map<number,number> = new Map<number,number>();
   selectedValue: number;
 
   constructor(private servicioService: ServicioService, private reservaService: ReservaService, private tipoServicioService: TipoServicioService) { }
@@ -55,7 +56,7 @@ export class MisReservasComponent implements OnInit {
      this.tipoServicioService.getAspectosAPuntuar(servicio.tipoServicio.id).subscribe(res => this.aspectosPuntuacion= res)
   }
 
-  countStar(star: number, aspecto:string) {
+  countStar(star: number, aspecto: number) {
 
 
     this.map.set(aspecto,star)
@@ -64,13 +65,12 @@ export class MisReservasComponent implements OnInit {
 
 
   save(){
-    console.log(this.map)
-    let jsonObject = {};
+    var puntuaciones: Puntuacion[] = []
     this.map.forEach((value, key) => {
-      jsonObject[key] = value
+      puntuaciones.push(new Puntuacion(key, value))
     })
-    console.log(jsonObject)
-    this.servicioService.puntuar(this.servicioAPuntuar,jsonObject).subscribe(() =>{})
+    console.log(JSON.stringify(puntuaciones))
+    this.servicioService.puntuar(this.servicioAPuntuar, puntuaciones).subscribe(() =>{})
 
   }
 }
