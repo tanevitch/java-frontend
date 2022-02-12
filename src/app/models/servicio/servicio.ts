@@ -8,6 +8,7 @@ export class Servicio {
   public url: string;
   public whatsapp: string;
   public foto: string;
+  public promedioPuntuaciones: number
   public tipoServicio: {id: number, nombre: string};
   public usuario_id: number;
 

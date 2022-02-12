@@ -8,6 +8,8 @@ import { ServicioService } from 'src/app/services/servicio.service';
 import {latLng, MapOptions, tileLayer, Map, Marker, icon} from 'leaflet';
 import Swal from 'sweetalert2';
 import { Evento } from 'src/app/models/evento';
+import { AspectoPuntuacion } from 'src/app/models/puntuacion/puntuacion';
+import { PuntuacionService } from 'src/app/services/puntuacion.service';
 
 @Component({
   selector: 'app-gestion-reservas',
@@ -22,16 +24,22 @@ export class GestionReservasComponent implements OnInit {
   reservasSinConfirmar: any
 
   servicio: Servicio
+  puntuaciones: any
+
   evento: Evento
   map: Map;
   mapOptions: MapOptions;
   marker = new Marker([-34.921035, -57.954522])
 
-  constructor(private eventoService: EventoService, private router: Router, private reservaService: ReservaService, private servicioService: ServicioService) { }
+  constructor(private puntuacionService: PuntuacionService, private router: Router, private reservaService: ReservaService, private servicioService: ServicioService) { }
 
   ngOnInit(): void {
     let id= window.location.pathname.split("/")[2];
     this.servicioService.getServicioConId(id).subscribe(res => this.servicio= res);
+    this.puntuacionService.obtenerPuntuaciones(id).subscribe(res => {
+      this.puntuaciones = res
+      console.log(res)
+    })
     this.reservaService.obtenerReservasDeServicio(id, "SINCONFIRMAR").subscribe(
       res => {
         this.reservasSinConfirmar = res

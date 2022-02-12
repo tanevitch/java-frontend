@@ -9,6 +9,9 @@
                     <p>
                       {{servicio.descripcion}}
                     </p>
+                    <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+                      Ver detalle puntuaciones
+                    </button>
                 </div>
                 <div class="col-lg-6">
                     <img src="{{servicio.foto}}" style="width: 100%" class="my-3">
@@ -102,6 +105,28 @@
             <h5 class="mb-3">No hay reservas</h5>
           </ng-template>
     </div>
+</section>
+<section>
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Calificaciones</h5>
+        </div>
+        <div class="modal-body">
+          <div class="col-lg">
+            <p>Cantidad de calificaciones: {{puntuaciones.length}}</p>
+            <ul>
+              <li *ngFor="let puntuacion of puntuaciones">{{puntuacion.aspectoPuntuacion.nombre}}: {{puntuacion.nota}}/5</li>
+            </ul>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 <style>
   #map {

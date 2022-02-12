@@ -47,9 +47,4 @@ export class ServicioService {
     return this.http.post(url, serv)
   }
 
-  public puntuar(servicio: Servicio, aspectoYPuntuacion: any): Observable<any>{
-    let url = environment.apiJava + this.endpoint + "/calificar/" + servicio.id
-    return this.http.post(url,
-      aspectoYPuntuacion)
-  }
 }

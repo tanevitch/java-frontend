@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Servicio } from '../../../models/servicio/servicio';
 import { Router, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
+import { PuntuacionService } from 'src/app/services/puntuacion.service';
 @Component({
   selector: 'app-mis-servicios',
   templateUrl: './mis-servicios.component.html',
@@ -14,7 +15,7 @@ export class MisServiciosComponent implements OnInit {
   public listServicios: Array<Servicio> = [];
 
 
-  constructor(private servicioService: ServicioService, private router: Router) { }
+  constructor(private servicioService: ServicioService, private router: Router, private puntuacionService: PuntuacionService) { }
 
   confirmDelete(serv: Servicio){
     Swal.fire({
@@ -45,6 +46,14 @@ export class MisServiciosComponent implements OnInit {
   obtenerMisServicios(){
     this.servicioService.getMisServicios().subscribe(res =>{
       this.listServicios = res;
+      this.listServicios.forEach( (s:any) => {
+        
+       this.puntuacionService.promedioServicio(s.id).subscribe( (p:any) => {
+         console.log(p)
+         s.promedioPuntuaciones= p
+       } )
+        console.log(s.promedioPuntuaciones)
+      })
     })
 
 

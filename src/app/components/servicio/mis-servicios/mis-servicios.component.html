@@ -24,6 +24,13 @@
           <p *ngIf="item.url" class="fst-italic text-muted small">
             URL: {{item.url}}
           </p>
+          <hr>
+          <p *ngIf="item.promedioPuntuaciones; else noPuntuada" class="text-muted">
+            Calificación general: {{item.promedioPuntuaciones}}/5
+          </p>
+          <ng-template #noPuntuada>
+              <p class="text-muted">No hay puntuaciones</p>
+          </ng-template>
          </div>
         <div class="card-footer text-center">
           <a class="btn btn-light border border-3" (click)="verReservas(item)">Ver solicitudes</a>

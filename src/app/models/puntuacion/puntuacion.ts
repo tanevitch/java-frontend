@@ -1,14 +1,15 @@
-import { Usuario } from "../usuario/usuario";
 
 export class Puntuacion {
     public aspectoPuntuacion: AspectoPuntuacion;
     public nota: number
     public usuario: any
+    public evento: any
     
-    constructor (aspecto: number, calificacion: number, user: any){
+    constructor (aspecto: number, calificacion: number, user: any, evento: any){
         this.aspectoPuntuacion = new AspectoPuntuacion(aspecto)
         this.nota = calificacion
         this.usuario = user
+        this.evento = evento
     }
 }
 

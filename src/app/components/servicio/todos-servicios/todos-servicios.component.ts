@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PuntuacionService } from 'src/app/services/puntuacion.service';
 import { ReservaService } from 'src/app/services/reserva.service';
 import { Servicio } from '../../../models/servicio/servicio';
 import { ServicioService } from '../../../services/servicio.service';
@@ -12,7 +13,7 @@ import { ServicioService } from '../../../services/servicio.service';
 export class buscarServicioComponent implements OnInit {
   public listServicios: Array<Servicio> = [];
 
-  constructor(private servicioService: ServicioService, private reservaService: ReservaService) { }
+  constructor(private servicioService: ServicioService, private reservaService: ReservaService, private puntuacionService: PuntuacionService) { }
 
   ngOnInit(): void {
     this.obtenerServicios();    
@@ -20,7 +21,14 @@ export class buscarServicioComponent implements OnInit {
   obtenerServicios(){
     this.servicioService.getServicios().subscribe(res =>{
         this.listServicios = res;
-        console.log(res)
+        this.listServicios.forEach( (s:any) => {
+        
+          this.puntuacionService.promedioServicio(s.id).subscribe( (p:any) => {
+            console.log(p)
+            s.promedioPuntuaciones= p
+          } )
+           console.log(s.promedioPuntuaciones)
+         })
     })
   }
 

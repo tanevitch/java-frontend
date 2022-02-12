@@ -26,6 +26,9 @@
                       <p *ngIf="item.url" class="fst-italic text-muted small">
                         URL: {{item.url}}
                       </p>
+                      <p *ngIf="item.promedioPuntuaciones" class="text-muted">
+                        Calificación general: {{item.promedioPuntuaciones}}/5
+                      </p>
                       <button type="button" (click)="reservar(item)" class="btn btn-primary">Reservar</button>
                   </div>
               </div>
