@@ -9,7 +9,7 @@
                     <p>
                       {{servicio.descripcion}}
                     </p>
-                    <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#exampleModal2">
                       Ver detalle puntuaciones
                     </button>
                 </div>
@@ -22,11 +22,11 @@
         <div class="accordion" id="accordionExample" *ngIf="reservasSinConfirmar; else elseBlock">
             <div class="accordion-item" *ngFor="let reserva of reservasSinConfirmar" >
               <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" attr.data-bs-target='#collapse{{reserva.id}}' aria-expanded="true" attr.aria-valuenow="collapse{{reserva.id}}">
                   Ver Solicitud
                 </button>
               </h2>
-              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+              <div id="collapse{{reserva.id}}" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                 <div class="accordion-body ">
                   <p><strong>{{reserva.usuario.nombre}} {{reserva.usuario.apellido}}</strong></p>
                   <strong>Evento: {{reserva.evento.fechaHora}}</strong>
@@ -36,10 +36,10 @@
                     <li>Telefono: {{reserva.telefono}}</li>
                     <li *ngIf="reserva.detalle">Descripcion: {{reserva.detalle}}</li>
                   </ul>
-                  <div id="map" leaflet
-                  (leafletMapReady)="onMapReady($event)"
-                  [leafletOptions]="mapOptions">
-              </div>
+                  <button type="button" (click)="addMarker(reserva.evento.geolocalizacion,this.map)" data-id="{{reserva.evento.geolocalizacion}}" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Ver ubicación del evento
+                  </button>
+
                   <div class="btn-group me-2" role="group" aria-label="Second group">
                     <button type="button" (click)="confirmar(reserva)" class="btn btn-secondary">Confirmar</button>
                   </div>
@@ -49,17 +49,16 @@
                 </div>
               </div>
             </div>
-
           </div>
           <h4> Reservas pendientes </h4>
           <div class="accordion" id="accordionExample" *ngIf="reservasPendientes; else elseBlock">
               <div class="accordion-item" *ngFor="let reserva of reservasPendientes" >
                 <h2 class="accordion-header" id="headingOne">
-                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" attr.data-bs-target='#collapse{{reserva.id}}' aria-expanded="true" attr.aria-valuenow="collapse{{reserva.id}}">
                     Ver Solicitud
                   </button>
                 </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div id="collapse{{reserva.id}}" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                   <div class="accordion-body">
                     <p><strong>{{reserva.usuario.nombre}} {{reserva.usuario.apellido}}</strong></p>
                     <strong>Evento: {{reserva.evento.fechaHora}}</strong>
@@ -69,6 +68,9 @@
                       <li>Telefono: {{reserva.telefono}}</li>
                       <li *ngIf="reserva.detalle">Descripcion: {{reserva.detalle}}</li>
                     </ul>
+                    <button type="button" (click)="addMarker(reserva.evento.geolocalizacion,this.map)" data-id="{{reserva.evento.geolocalizacion}}" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                      Ver ubicación del evento
+                    </button>
                     <div class="btn-group me-2" role="group" aria-label="Third group">
                       <button type="button" (click)="marcarComoFinalizada(reserva)" class="btn btn-secondary">Marcar como finalizada</button>
                     </div>
@@ -83,11 +85,11 @@
             <div class="accordion" id="accordionExample" *ngIf="reservasCanceladas; else elseBlock">
               <div class="accordion-item" *ngFor="let reserva of reservasCanceladas" >
                 <h2 class="accordion-header" id="headingOne">
-                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" attr.data-bs-target='#collapse{{reserva.id}}' aria-expanded="true" attr.aria-valuenow="collapse{{reserva.id}}">
                     Ver Solicitud
                   </button>
                 </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div id="collapse{{reserva.id}}" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                   <div class="accordion-body">
                     <p><strong>{{reserva.usuario.nombre}} {{reserva.usuario.apellido}}</strong></p>
                     <strong>Evento: {{reserva.evento.fechaHora}}</strong>
@@ -107,7 +109,28 @@
     </div>
 </section>
 <section>
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!-- Modal mapa -->
+<div class="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="mapa" id="map" leaflet
+        (leafletMapReady)="onMapReady($event)"
+        [leafletOptions]="mapOptions">
+        
+      </div>
+      </div>
+    </div>
+  </div>
+</div>  
+
+  <!-- Modal puntuacion -->
+
+  <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -129,8 +152,11 @@
   </div>
 </section>
 <style>
-  #map {
-  height: 300px;
-  width: 400px;
-}
-</style>
+
+  .mapa{
+    height: 300px !important;
+    width: 100%;
+    position: relative !important;
+    left: 0;
+  }
+  </style>

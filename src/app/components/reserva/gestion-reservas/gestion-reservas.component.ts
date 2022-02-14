@@ -123,6 +123,23 @@ export class GestionReservasComponent implements OnInit {
 
   }
 
+  addMarker(lat: string,mapita:Map){
+
+    if (this.marker) {
+      this.marker.remove()
+  };
+  var xd = lat.split(",").map(Number)
+    this.marker = new Marker([xd[0],xd[1]]).addTo(this.map);
+  var bool = true
+    setInterval(function () {  
+        mapita.invalidateSize();
+        if (bool){ 
+          mapita.flyTo([xd[0],xd[1]]); 
+          bool= false}  }
+        , 200);
+ 
+}
+
   private initializeMapOptions() {
     this.mapOptions = {
       center: latLng(-34.921035, -57.954522),
