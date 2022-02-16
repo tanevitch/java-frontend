@@ -47,4 +47,19 @@ export class ServicioService {
     return this.http.post(url, serv)
   }
 
+  public getServiciosPorNombre(): Observable<Array<Servicio>>{
+    let url = environment.apiJava + this.endpoint + "/excepto_usuario/" + this.authService.obtenerIdUsuario();
+    return this.http.get<Array<Servicio>>(url);
+  }
+
+  //este es para el buscador
+  public getServicioPorNombre(name:string): Observable<Array<Servicio>>{
+    let url = environment.apiJava + this.endpoint + "/por_nombre/" + name;
+    return this.http.get<Array<Servicio>>(url);
+  }
+
+  public getServicioPorCategoria(name:string): Observable<Array<Servicio>>{
+    let url = environment.apiJava + this.endpoint + "/por_categoria/" + name;
+    return this.http.get<Array<Servicio>>(url);
+  }
 }
