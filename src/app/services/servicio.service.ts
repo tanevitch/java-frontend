@@ -63,12 +63,4 @@ export class ServicioService {
     }});
   }
 
-  public getServicioPorCategoria(name:string): Observable<Array<Servicio>>{
-    let id= this.authService.obtenerIdUsuario() || -1
-    let url = environment.apiJava + this.endpoint + "/por_categoria";
-    return this.http.get<Array<Servicio>>(url, { params: {
-      "name": name,
-      "user": id
-    }});
-  }
 }
