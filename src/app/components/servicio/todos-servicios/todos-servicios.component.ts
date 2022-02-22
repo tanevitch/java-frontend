@@ -11,9 +11,13 @@ import { ServicioService } from '../../../services/servicio.service';
   styleUrls: ['./todos-servicios.component.css', '../../../app.component.css']
 })
 
+
 export class buscarServicioComponent implements OnInit {
   public listServicios: Array<Servicio> = [];
   public listTipoServicio: Array<any> = [];
+  servicioFiltro: ""
+  categoriaFiltro: ""
+  
   constructor(private servicioService: ServicioService, private tipoServicioService: TipoServicioService, private reservaService: ReservaService, private puntuacionService: PuntuacionService) { }
 
   ngOnInit(): void {
@@ -33,41 +37,34 @@ export class buscarServicioComponent implements OnInit {
           } )
            console.log(s.promedioPuntuaciones)
          })
+         this.servicioFiltro= ""
+         this.categoriaFiltro= ""
     })
+    
   }
 
-  obtenerServiciosPorNombre(nombre:string){
-    if (nombre != ""){
-    this.servicioService.getServicioPorNombre(nombre).subscribe(res =>{
-      this.listServicios = res;
-      this.listServicios.forEach( (s:any) => {
-      
-        this.puntuacionService.promedioServicio(s.id).subscribe( (p:any) => {
-          console.log(p)
-          s.promedioPuntuaciones= p
-        } )
-         console.log(s.promedioPuntuaciones)
-       })
+  buscarServicios(){
+
+    console.log(this.servicioFiltro, this.categoriaFiltro)
+    this.servicioService.getServicioConFiltro(this.servicioFiltro, this.categoriaFiltro).subscribe(res =>{
+      if (res == null){
+        this.listServicios= []
+      }
+      else{
+        this.listServicios = res;
+        this.listServicios.forEach( (s:any) => {
+        
+          this.puntuacionService.promedioServicio(s.id).subscribe( (p:any) => {
+            console.log(p)
+            s.promedioPuntuaciones= p
+          } )
+          console.log(s.promedioPuntuaciones)
+        })
+      }
   })
-}
+
 }
 
-obtenerServiciosPorCategoria(categoria:string){
-  if (categoria != ""){
-  console.log(categoria)
-  this.servicioService.getServicioPorCategoria(categoria).subscribe(res =>{
-    this.listServicios = res;
-    this.listServicios.forEach( (s:any) => {
-    
-      this.puntuacionService.promedioServicio(s.id).subscribe( (p:any) => {
-        console.log(p)
-        s.promedioPuntuaciones= p
-      } )
-       console.log(s.promedioPuntuaciones)
-     })
-})
-}
-}
    
   reservar(servicio: Servicio){
     this.reservaService.reservarServicio(servicio)

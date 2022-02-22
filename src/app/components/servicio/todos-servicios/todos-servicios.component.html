@@ -1,23 +1,21 @@
 <section>
   <div class="container">
     
-      <div class="row my-3 justify-content-center" *ngIf="listServicios.length != 0; else elseBlock">
+      <div class="row my-3 justify-content-center">
           <h1 class="pb-2">Búsqueda de servicios</h1>
           <div class="input-group mb-3">
-            <input type="text"  class="form-control" #servicioInput name="servicioInput" id="servicioInput" placeholder="Ingresá el nombre del servicio" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <input type="text"  class="form-control" [(ngModel)]="servicioFiltro" placeholder="Ingresá el nombre del servicio" aria-label="Recipient's username" aria-describedby="basic-addon2">
             <div class="input-group-append">
-              <button class="mt-2 btn btn-outline-secondary" (click)="obtenerServiciosPorNombre(servicioInput.value)" type="button">Buscar</button>
-              <button class="mt-2 btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Categoría</button>
-              <ul class="dropdown-menu dropdown-menu-end" >
-                <div *ngFor="let categoria of listTipoServicio">
-                  <li><a role="button" class="dropdown-item" (click)="obtenerServiciosPorCategoria(categoria.nombre)">{{categoria.nombre}}</a></li>
-                </div>
-                
-              </ul>
+              <select [(ngModel)]="categoriaFiltro">
+                <option *ngFor="let categoria of listTipoServicio" [ngValue]="categoria">{{categoria.nombre}}</option>
+              </select>
+              
+              <button class="mt-2 btn btn-outline-secondary" (click)="buscarServicios()" type="button">Buscar</button>
+              <button class="mt-2 btn btn-outline-secondary" (click)="obtenerServicios()">Limpiar filtros</button>
             </div>
-            
           </div>
-          <div class="col-lg-4 py-2" *ngFor="let item of listServicios">
+          <div class="d-flex" *ngIf="listServicios.length != 0; else elseBlock">
+            <div class="col-lg-4 py-2" *ngFor="let item of listServicios" >
               <div class="card  h-100 mb-2 " style="max-width: 100%;">
                   <div class="card-header rojo">
                   </div>
@@ -47,10 +45,13 @@
                       <button type="button" (click)="reservar(item)" class="btn btn-primary">Reservar</button>
                   </div>
               </div>
+            </div>
           </div>
-      </div>
-      <ng-template #elseBlock>
-        <h1 class="text-center">No hay resultados</h1>
-      </ng-template>
+          
+            <ng-template #elseBlock>
+              <h1 class="text-center">No hay resultados</h1>
+            </ng-template>
+          </div>
+      
   </div>
 </section>

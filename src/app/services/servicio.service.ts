@@ -53,13 +53,22 @@ export class ServicioService {
   }
 
   //este es para el buscador
-  public getServicioPorNombre(name:string): Observable<Array<Servicio>>{
-    let url = environment.apiJava + this.endpoint + "/por_nombre/" + name;
-    return this.http.get<Array<Servicio>>(url);
+  public getServicioConFiltro(nombreSevicio:string, categoria: any): Observable<Array<Servicio>>{
+    let id= this.authService.obtenerIdUsuario() || -1
+    let url = environment.apiJava + this.endpoint + "/buscar";
+    return this.http.get<Array<Servicio>>(url, { params: {
+      "nombre": nombreSevicio,
+      "categoria": categoria.id || "",
+      "user": id
+    }});
   }
 
   public getServicioPorCategoria(name:string): Observable<Array<Servicio>>{
-    let url = environment.apiJava + this.endpoint + "/por_categoria/" + name;
-    return this.http.get<Array<Servicio>>(url);
+    let id= this.authService.obtenerIdUsuario() || -1
+    let url = environment.apiJava + this.endpoint + "/por_categoria";
+    return this.http.get<Array<Servicio>>(url, { params: {
+      "name": name,
+      "user": id
+    }});
   }
 }
