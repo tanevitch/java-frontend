@@ -16,8 +16,30 @@
         </div>
 
         <div class="card-footer text-center">
-          <a class="btn btn-light border border-3" >Servicios solicitados</a>
+          <button class="btn btn-light border border-3" data-bs-toggle="modal" (click)="verServiciosDe(item)" data-bs-target="#exampleModal">Servicios solicitados</button>
         </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div *ngIf="eventoClickeado" class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{eventoClickeado.nombre}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div >
+            <ul class="list-group list-group-flush" >
+              <li class="list-group-item" *ngFor="let item of serviciosDelEventoClickeado">
+                <b>{{item.tipoServicio.nombre}}</b>
+                <br>
+                {{item.nombre}} - <span class="text-muted"> {{item.whatsapp}}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>

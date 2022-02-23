@@ -29,6 +29,10 @@ export class MisReservasComponent implements OnInit {
   constructor(private puntuacionService: PuntuacionService, private reservaService: ReservaService, private tipoServicioService: TipoServicioService, private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.obtenerReservas()
+
+  }
+  obtenerReservas(){
     this.reservaService.obtenerReservas().subscribe(res => {
       res.forEach((reserva: any) => {
         let fechaHora= reserva.fechaHora.toLocaleString("es-AR").split("T")
@@ -41,9 +45,15 @@ export class MisReservasComponent implements OnInit {
       this.reservas= res
       
     })
-
   }
-
+  soloFinalizadas(evento:any){
+    if(evento.target.checked){
+      this.reservas= this.reservas.filter((r:any) =>r.estado.nombre == "FINALIZADA")
+    }
+    else{
+      this.obtenerReservas()
+    }
+  }
 
   cancelar(reserva: Reserva){
     this.reservaService.cambiarEstado(reserva.id, "CANCELADA").subscribe(() => {
@@ -96,7 +106,5 @@ export class MisReservasComponent implements OnInit {
     
   }
 }
-function res(res: any, arg1: (any: any) => any) {
-  throw new Error('Function not implemented.');
-}
+
 

@@ -1,57 +1,110 @@
 <section>
   <div class="container">
-    
-      <div class="row my-3 justify-content-center">
-          <h1 class="pb-2">Búsqueda de servicios</h1>
-          <div class="input-group mb-3">
-            <input type="text"  class="form-control" [(ngModel)]="servicioFiltro" placeholder="Ingresá el nombre del servicio" aria-label="Recipient's username" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-              <select [(ngModel)]="categoriaFiltro">
-                <option *ngFor="let categoria of listTipoServicio" [ngValue]="categoria">{{categoria.nombre}}</option>
-              </select>
-              
-              <button class="mt-2 btn btn-outline-secondary" (click)="buscarServicios()" type="button">Buscar</button>
-              <button class="mt-2 btn btn-outline-secondary" (click)="obtenerServicios()">Limpiar filtros</button>
+    <h1 class="pb-2">Los 5 mejores</h1>
+    <div class="d-flex " *ngIf="mejoresPuntuados.length != 0">
+      <div class="row card-group" >
+        <div class="col-lg-4 py-2" *ngFor="let item of mejoresPuntuados">
+          <div class="card mb-2 " style="max-width: 100%;">
+            <div class="card-header rojo">
+            </div>
+            <img class="card-img-top" src={{item[1].foto}} alt="Card image cap">
+            <div class="card-body ">
+              <p style="font-size: large;">
+                <strong>{{item[1].nombre}}</strong>
+                <br>
+                <small>{{item[1].tipoServicio.nombre}}</small>
+              </p>
+              <p>
+                {{item[1].descripcion}}
+              </p>
+              <p class="fst-italic text-muted small">
+                Tel: {{item[1].whatsapp}}
+              </p>
+              <p *ngIf="item.instagram" class="fst-italic text-muted small">
+                Instagram: {{item[1].instagram}}
+              </p>
+
+              <p *ngIf="item.url" class="fst-italic text-muted small">
+                URL: {{item[1].url}}
+              </p>
+              <p class="text-muted">
+                Calificación general: {{item[0]}}/5
+              </p>
+              <button type="button" *ngIf="item[2].id != authService.obtenerIdUsuario()" (click)="reservar(item[1])"
+                class="btn btn-primary">Reservar</button>
             </div>
           </div>
-          <div class="d-flex" *ngIf="listServicios.length != 0; else elseBlock">
-            <div class="col-lg-4 py-2" *ngFor="let item of listServicios" >
-              <div class="card  h-100 mb-2 " style="max-width: 100%;">
-                  <div class="card-header rojo">
-                  </div>
-                  <img class="card-img-top" src={{item.foto}} alt="Card image cap">
-                  <div class="card-body ">
-                      <p style="font-size: large;">
-                          <strong>{{item.nombre}}</strong>
-                          <br>
-                          <small>{{item.tipoServicio.nombre}}</small>
-                      </p>
-                      <p>
-                        {{item.descripcion}}
-                      </p>
-                      <p class="fst-italic text-muted small">
-                          Tel: {{item.whatsapp}}
-                      </p>
-                      <p *ngIf="item.instagram" class="fst-italic text-muted small">
-                          Instagram: {{item.instagram}}
-                      </p>
-                      
-                      <p *ngIf="item.url" class="fst-italic text-muted small">
-                        URL: {{item.url}}
-                      </p>
-                      <p *ngIf="item.promedioPuntuaciones" class="text-muted">
-                        Calificación general: {{item.promedioPuntuaciones}}/5
-                      </p>
-                      <button type="button" (click)="reservar(item)" class="btn btn-primary">Reservar</button>
-                  </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row my-3 justify-content-center">
+      <h1 class="pb-2">Búsqueda de servicios</h1>
+
+      <div class="d-flex align-items-center">
+        <div class="col-lg-4 me-2">
+          <label for="select">Nombre</label>
+          <input type="text" class="form-control" [(ngModel)]="servicioFiltro"
+            placeholder="Ingresá el nombre del servicio">
+        </div>
+        <div class="col-lg-3 me-2">
+          <label class="mb-1" for="select">Categoría</label>
+          <select [(ngModel)]="categoriaFiltro" class="form-select" id="select">
+            <option value="">Todas</option>
+            <option *ngFor="let categoria of listTipoServicio" [ngValue]="categoria">{{categoria.nombre}}</option>
+          </select>
+        </div>
+
+      </div>
+      <div>
+        <button class="btn btn-outline-secondary" (click)="buscarServicios()" type="button">Buscar</button>
+        <button class="btn btn-outline-secondary" (click)="obtenerServicios()">Limpiar filtros</button>
+      </div>
+      
+        <div class="d-flex" *ngIf="listServicios.length != 0; else elseBlock">
+          <div class="row card-group">
+          <div class="col-lg-4 py-2" *ngFor="let item of listServicios">
+            <div class="card mb-2 " style="max-width: 100%;">
+              <div class="card-header rojo">
+              </div>
+              <img class="card-img-top" src={{item.foto}} alt="Card image cap">
+              <div class="card-body ">
+                <p style="font-size: large;">
+                  <strong>{{item.nombre}}</strong>
+                  <br>
+                  <small>{{item.tipoServicio.nombre}}</small>
+                </p>
+                <p>
+                  {{item.descripcion}}
+                </p>
+                <p class="fst-italic text-muted small">
+                  Tel: {{item.whatsapp}}
+                </p>
+                <p *ngIf="item.instagram" class="fst-italic text-muted small">
+                  Instagram: {{item.instagram}}
+                </p>
+  
+                <p *ngIf="item.url" class="fst-italic text-muted small">
+                  URL: {{item.url}}
+                </p>
+                <p *ngIf="item.promedioPuntuaciones" class="text-muted">
+                  Calificación general: {{item.promedioPuntuaciones}}/5
+                </p>
+                <button type="button" (click)="reservar(item)" class="btn btn-primary">Reservar</button>
               </div>
             </div>
           </div>
-          
-            <ng-template #elseBlock>
-              <h1 class="text-center">No hay resultados</h1>
-            </ng-template>
-          </div>
+      </div>
       
+      </div>
+
+      <ng-template #elseBlock>
+        <h1 class="text-center">No hay resultados</h1>
+      </ng-template>
+    </div>
+
   </div>
+  
 </section>
+<script src="cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/…" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>

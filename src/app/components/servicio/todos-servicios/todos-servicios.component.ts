@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 import { PuntuacionService } from 'src/app/services/puntuacion.service';
 import { ReservaService } from 'src/app/services/reserva.service';
 import { TipoServicioService } from 'src/app/services/tiposervicio.service';
@@ -17,25 +18,31 @@ export class buscarServicioComponent implements OnInit {
   public listTipoServicio: Array<any> = [];
   servicioFiltro: ""
   categoriaFiltro: ""
+  mejoresPuntuados: any
   
-  constructor(private servicioService: ServicioService, private tipoServicioService: TipoServicioService, private reservaService: ReservaService, private puntuacionService: PuntuacionService) { }
+  constructor(public authService: AuthService, private servicioService: ServicioService, private tipoServicioService: TipoServicioService, private reservaService: ReservaService, private puntuacionService: PuntuacionService) { }
 
   ngOnInit(): void {
+    this.servicioService.getMejorPuntuados().subscribe(res => {
+      this.mejoresPuntuados= res
+      console.log(res)
+    });
     this.obtenerServicios(); 
     this.tipoServicioService.getCategorias().subscribe(res =>{
       this.listTipoServicio = res;  })
     }
 
+  userLogueado(){
+    return this.authService.obtenerIdUsuario()
+  }
   obtenerServicios(){
     this.servicioService.getServicios().subscribe(res =>{
         this.listServicios = res;
         this.listServicios.forEach( (s:any) => {
         
           this.puntuacionService.promedioServicio(s.id).subscribe( (p:any) => {
-            console.log(p)
             s.promedioPuntuaciones= p
           } )
-           console.log(s.promedioPuntuaciones)
          })
          this.servicioFiltro= ""
          this.categoriaFiltro= ""
@@ -45,7 +52,6 @@ export class buscarServicioComponent implements OnInit {
 
   buscarServicios(){
 
-    console.log(this.servicioFiltro, this.categoriaFiltro)
     this.servicioService.getServicioConFiltro(this.servicioFiltro, this.categoriaFiltro).subscribe(res =>{
       if (res == null){
         this.listServicios= []
@@ -55,10 +61,8 @@ export class buscarServicioComponent implements OnInit {
         this.listServicios.forEach( (s:any) => {
         
           this.puntuacionService.promedioServicio(s.id).subscribe( (p:any) => {
-            console.log(p)
             s.promedioPuntuaciones= p
           } )
-          console.log(s.promedioPuntuaciones)
         })
       }
   })

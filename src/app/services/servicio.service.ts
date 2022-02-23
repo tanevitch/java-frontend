@@ -63,4 +63,18 @@ export class ServicioService {
     }});
   }
 
+  public buscarPorEvento(id: any){
+    let user= this.authService.obtenerIdUsuario() || -1
+    let url = environment.apiJava + this.endpoint + "/buscarPorEvento";
+    return this.http.get(url, {params: {
+      "id_evento": id,
+      "id_user": user
+    }});
+  }
+
+  public getMejorPuntuados(){
+    let url = environment.apiJava + this.endpoint + "/mejorPuntuados";
+    return this.http.get(url);
+  }
+
 }
