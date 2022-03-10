@@ -6,6 +6,7 @@ import {latLng, MapOptions, tileLayer, Map, Marker, icon} from 'leaflet';
 import { EventoService } from 'src/app/services/evento.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-nuevo-evento',
@@ -25,6 +26,9 @@ export class NuevoEventoComponent implements OnInit {
   constructor(private authService: AuthService, private http: HttpClient, private eventoService: EventoService, private tipoEventoService: TipoeventoService, private router: Router) { }
 
   ngOnInit(): void {
+    var today = new Date().toISOString().slice(0, 16);
+
+    document.getElementById("fechahora")?.setAttribute("min", today)
     this.http.get("https://apis.datos.gob.ar/georef/api/provincias").subscribe((res: any) => {(this.provincias = res.provincias.map((p:any) => p.nombre).sort())})
     this.tipoEventoService.getTipoEventos().subscribe( res => {console.log(res); this.tipoEventos = res})
     this.initializeMapOptions();
@@ -93,7 +97,12 @@ export class NuevoEventoComponent implements OnInit {
     console.log(datos)
 
     this.eventoService.nuevoEvento(datos).subscribe(() =>{
-      this.router.navigate([""]);
+      Swal.fire(
+        '¡Listo!',
+        'Tu evento ha sido creado',
+        'success'
+      )
+      this.router.navigate(["eventos"]);
 
       });
   }

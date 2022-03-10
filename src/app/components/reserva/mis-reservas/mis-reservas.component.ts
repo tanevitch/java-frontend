@@ -34,15 +34,17 @@ export class MisReservasComponent implements OnInit {
   }
   obtenerReservas(){
     this.reservaService.obtenerReservas().subscribe(res => {
-      res.forEach((reserva: any) => {
-        let fechaHora= reserva.fechaHora.toLocaleString("es-AR").split("T")
-        reserva.fecha = fechaHora[0]
-        reserva.hora = fechaHora[1]
-        this.puntuacionService.puntuada(reserva).subscribe((res: any) => {
-          reserva.puntuada= res
-        })
-      });
-      this.reservas= res
+      if (res!=null){
+        res.forEach((reserva: any) => {
+          let fechaHora= reserva.fechaHora.toLocaleString("es-AR").split("T")
+          reserva.fecha = fechaHora[0]
+          reserva.hora = fechaHora[1]
+          this.puntuacionService.puntuada(reserva).subscribe((res: any) => {
+            reserva.puntuada= res
+          })
+        });
+        this.reservas= res
+      }
       
     })
   }

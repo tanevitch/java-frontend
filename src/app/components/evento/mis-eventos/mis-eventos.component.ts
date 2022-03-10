@@ -22,7 +22,11 @@ export class MisEventosComponent implements OnInit {
 
   verServiciosDe(evento:any){
     this.eventoClickeado= evento
-    this.servicioService.buscarPorEvento(evento.id).subscribe((res:any) => this.serviciosDelEventoClickeado= res)
+    this.servicioService.buscarPorEvento(evento.id).subscribe((res:any) => {
+      this.serviciosDelEventoClickeado= res
+      console.log(this.serviciosDelEventoClickeado)
+    })
+    
   }
   obtenerMisEventos(){
     this.eventoService.getEventos().subscribe(res =>{

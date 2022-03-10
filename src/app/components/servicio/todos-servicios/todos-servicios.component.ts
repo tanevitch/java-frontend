@@ -38,12 +38,15 @@ export class buscarServicioComponent implements OnInit {
   obtenerServicios(){
     this.servicioService.getServicios().subscribe(res =>{
         this.listServicios = res;
-        this.listServicios.forEach( (s:any) => {
-        
-          this.puntuacionService.promedioServicio(s.id).subscribe( (p:any) => {
-            s.promedioPuntuaciones= p
-          } )
-         })
+        if (this.listServicios != null){
+
+          this.listServicios.forEach( (s:any) => {
+          
+            this.puntuacionService.promedioServicio(s.id).subscribe( (p:any) => {
+              s.promedioPuntuaciones= p
+            } )
+           })
+        }
          this.servicioFiltro= ""
          this.categoriaFiltro= ""
     })
@@ -58,12 +61,14 @@ export class buscarServicioComponent implements OnInit {
       }
       else{
         this.listServicios = res;
-        this.listServicios.forEach( (s:any) => {
+        if (this.listServicios != null){
+          this.listServicios.forEach( (s:any) => {
         
-          this.puntuacionService.promedioServicio(s.id).subscribe( (p:any) => {
-            s.promedioPuntuaciones= p
-          } )
-        })
+            this.puntuacionService.promedioServicio(s.id).subscribe( (p:any) => {
+              s.promedioPuntuaciones= p
+            } )
+          })
+        }
       }
   })
 

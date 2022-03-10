@@ -31,6 +31,9 @@ export class ReservarServicioComponent implements OnInit {
     private userService: UsuarioService) { }
 
   ngOnInit(): void {
+    var today = new Date().toISOString().slice(0, 16);
+
+    document.getElementById("fechahora")?.setAttribute("min", today)
     this.eventoService.getEventos().subscribe(res =>{
       this.eventos= res;
     })
