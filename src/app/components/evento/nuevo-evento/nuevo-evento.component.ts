@@ -54,7 +54,7 @@ export class NuevoEventoComponent implements OnInit {
       zoom: 13,
       layers: [
         tileLayer(
-          'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+          'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
           {
             maxZoom: 18,
             attribution: 'Map data © OpenStreetMap contributors'
