@@ -83,6 +83,7 @@ export class ReservarServicioComponent implements OnInit {
     }
     console.log(datos)
     this.reservaService.nuevaReserva(datos).subscribe(() =>{
+      console.log(datos)
       Swal.fire(
         '¡Listo!',
         'Tu servicio ha sido creado.',

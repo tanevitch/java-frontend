@@ -9,10 +9,9 @@
         <div class="card-body">
           <h5 class="card-title">{{item.nombre}}</h5>
           <h6 class="card-text">Codigo postal: {{item.cp}}</h6>
+          <p class="card-text text-muted">{{item.fechaHora}}</p>
+          <p class="card-text ">{{item.provincia}} <br>{{item.direccion}}</p>
 
-          <p class="card-text ">{{item.provincia}}</p>
-
-          <p class="card-text ">{{item.direccion}}</p>
         </div>
 
         <div class="card-footer text-center">
@@ -34,7 +33,7 @@
               <li class="list-group-item" *ngFor="let item of serviciosDelEventoClickeado">
                 <b>{{item.tipoServicio.nombre}}</b>
                 <br>
-                {{item.nombre}} - <span class="text-muted"> {{item.whatsapp}}</span>
+                {{item.nombre}}  - <span class="text-muted"> {{item.whatsapp}}</span>
               </li>
             </ul>
           </div>
